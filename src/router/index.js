@@ -1,24 +1,23 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import BlogPosts from '@/pages/BlogPosts.vue';
-import CreatePost from '@/pages/CreatePost.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
     {
         path: '/',
-        name: 'blog_posts',
-        component: BlogPosts,
+        name: 'posts',
+        component: () => import(/* webpackChunkName: "posts" */ '../pages/Posts.vue'),
     },
     {
-        path: '/create-post',
+        path: '/create_post',
         name: 'create_post',
-        component: CreatePost,
+        component: () => import(/* webpackChunkName: "create_post" */ '../pages/CreatePost.vue'),
     },
 ];
 
 const router = new VueRouter({
+    mode: 'history',
     routes,
 });
 

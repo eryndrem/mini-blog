@@ -13,6 +13,10 @@ export default {
     components: {
         MainLayout,
     },
+
+    created() {
+        this.$store.dispatch('loadDataFromStorage');
+    },
 };
 </script>
 
