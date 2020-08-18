@@ -3,8 +3,9 @@
     </div>
 </template>
 
-<scritp>
-</scritp>
+<script>
+</script>
 
-<style>
+<style lang="sass">
+@import "styles/main"
 </style>
