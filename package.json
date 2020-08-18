@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@mdi/font": "^5.5.55",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0",
@@ -41,11 +42,11 @@
       "parser": "babel-eslint"
     },
     "rules": {
-        "indent": [
+      "indent": [
         "error",
         4
       ],
-        "guard-for-in": "error"
+      "guard-for-in": "error"
     }
   },
   "browserslist": [

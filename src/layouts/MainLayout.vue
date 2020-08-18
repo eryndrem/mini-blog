@@ -2,9 +2,7 @@
     <div>
         <tool-bar></tool-bar>
 
-        <div>
-            <slot></slot>
-        </div>
+        <slot></slot>
     </div>
 </template>
 

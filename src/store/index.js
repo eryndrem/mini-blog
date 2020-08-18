@@ -11,6 +11,7 @@ export default new Vuex.Store({
             title: '',
             shortDescription: '',
             text: '',
+            date: '',
         },
 
         comments: [],
@@ -37,13 +38,16 @@ export default new Vuex.Store({
             state.post.text = value;
         },
 
-        ADD_POST(state) {
+        ADD_POST(state, date) {
             state.posts.unshift({
                 name: state.post.name,
                 title: state.post.title,
                 shortDescription: state.post.shortDescription,
                 text: state.post.text,
+                date,
             });
+
+            console.log(state.posts);
         },
 
         CLEAR_POST(state) {
@@ -55,20 +59,29 @@ export default new Vuex.Store({
         },
 
         LOAD_DATA_FROM_STORAGE(state, posts) {
-            for (let i = 0; i < posts.length; i += 1) {
+            for (let i = posts.length - 1; i >= 0; i -= 1) {
                 state.post.name = posts[i].name;
                 state.post.title = posts[i].title;
                 state.post.shortDescription = posts[i].shortDescription;
                 state.post.text = posts[i].text;
+                state.post.date = posts[i].date;
 
-                this.dispatch('addPost');
+                this.dispatch('addPost', state.post.date);
+            }
+        },
+
+        DELETE_POST(state, name) {
+            for (let i = 0; i < state.posts.length; i += 1) {
+                if (state.posts[i].name === name) {
+                    state.posts.splice(state.posts[i], 1);
+                }
             }
         },
     },
 
     actions: {
-        createPost({ commit }) {
-            commit('ADD_POST');
+        createPost({ commit }, date) {
+            commit('ADD_POST', date);
             commit('CLEAR_POST');
 
             this.dispatch('addDataToStorage');
@@ -87,19 +100,34 @@ export default new Vuex.Store({
                 console.log('localStorage posts = ', posts);
 
                 commit('LOAD_DATA_FROM_STORAGE', posts);
-
                 commit('CLEAR_POST');
             }
         },
 
-        addPost({ commit }) {
-            commit('ADD_POST');
+        addPost({ commit }, date) {
+            commit('ADD_POST', date);
         },
 
         addDataToStorage({ state }) {
             localStorage.setItem('posts', JSON.stringify(state.posts));
         },
-    },
-    modules: {
+
+        deletePost({ commit }, name) {
+            let posts = localStorage.getItem('posts');
+
+            posts = JSON.parse(posts);
+
+            if (posts) {
+                for (let i = 0; i < posts.length; i += 1) {
+                    if (posts[i].name === name) {
+                        posts.splice(posts[i], 1);
+                    }
+                }
+
+                localStorage.setItem('posts', JSON.stringify(posts));
+            }
+
+            commit('DELETE_POST', name);
+        },
     },
 });

@@ -38,6 +38,11 @@
 <script>
 export default {
     name: 'CreatePost',
+
+    data: () => ({
+        date: new Date(),
+    }),
+
     computed: {
         name: {
             get() {
@@ -74,11 +79,15 @@ export default {
                 this.$store.commit('SET_TEXT', value);
             },
         },
+
+        getDate() {
+            return this.date.toLocaleString('ru');
+        },
     },
 
     methods: {
         createPost() {
-            this.$store.dispatch('createPost');
+            this.$store.dispatch('createPost', this.getDate);
         },
     },
 };
