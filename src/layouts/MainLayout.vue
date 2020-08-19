@@ -2,7 +2,7 @@
     <div>
         <tool-bar></tool-bar>
 
-        <slot></slot>
+        <slot />
     </div>
 </template>
 

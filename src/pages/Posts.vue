@@ -8,29 +8,33 @@
         </p>
 
         <article v-else
-                 class="post"
                  v-for="{ name, title, shortDescription } in posts"
-                 :key="name">
-                <div class="post__tools">
-                    <div class="post__title">
-                        {{ title }}
-                    </div>
-
-                    <div class="post__name">
-                        {{ name }}
-                    </div>
-
-                    <span class="mdi mdi-tooltip-edit post__edit"
-                          title="edit"></span>
-
-                    <span class="mdi mdi-delete post__delete"
-                          title="delete"
-                          @click="deletePost(name)"></span>
+                 :key="name"
+                 class="short-post">
+            <div class="short-post__header">
+                <div class="short-post__title">
+                    {{ title }}
                 </div>
 
-                <div class="post__short-description">
-                    {{ shortDescription }}
+                <div class="short-post__name">
+                    {{ name }}
                 </div>
+
+                <span class="mdi mdi-tooltip-edit short-post__edit"
+                      title="edit"></span>
+
+                <span class="mdi mdi-delete short-post__delete"
+                      title="delete"
+                      @click="deletePost(name)"></span>
+
+            </div>
+
+            <p class="short-post__short-description">
+                {{ shortDescription }}
+            </p>
+
+            <router-link class="short-post__read-more"
+                :to="`post/${name}`">Read more...</router-link>
         </article>
     </div>
 </template>
@@ -39,7 +43,7 @@
 import { mapState } from 'vuex';
 
 export default {
-    name: 'BlogPosts',
+    name: 'Posts',
 
     computed: mapState({
         posts: (state) => state.posts,
