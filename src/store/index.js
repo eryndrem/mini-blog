@@ -77,16 +77,12 @@ export default new Vuex.Store({
 
             const comments = [...post.comments];
 
-            console.log(comments);
-
             comments.splice(
                 comments.findIndex(
                     (comment) => comment.username === username && comment.text === text,
                 ),
                 1,
             );
-
-            console.log(comments);
 
             commit('SET_POST_COMMENTS', {
                 post, comments,

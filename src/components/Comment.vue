@@ -1,11 +1,14 @@
 <template>
-    <div class="post__comment">
-        <h5>Author: {{ comment.username }}</h5>
+    <div class="comment">
+        <div class="comment__header">
+            <h5 class="comment__username">Author: {{ comment.username }}</h5>
 
-        <span class="mdi mdi-delete-variant"
-              @click="deleteComment"></span>
+            <span class="mdi mdi-delete-variant comment__delete"
+                  @click="deleteComment"
+                  title="delete"></span>
+        </div>
 
-        <p>{{ comment.text }}</p>
+        <p class="comment__text">{{ comment.text }}</p>
     </div>
 </template>
 

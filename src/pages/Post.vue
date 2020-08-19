@@ -1,35 +1,47 @@
 <template>
-    <article class="post" v-if="post">
-        <div class="post__tools">
-            <span class="post__date">
-                {{ post.date }}
-            </span>
+    <div v-if="post"
+         class="post">
+        <article>
+            <div class="post__header">
+                <span class="post__date">
+                    {{ post.date }}
+                </span>
 
-            <span class="post__name">
-                {{ post.name }}
-            </span>
+                <span class="post__name">
+                    {{ post.name }}
+                </span>
+            </div>
+
+            <h2 class="post__title">
+                {{ post.title }}
+            </h2>
+
+            <p class="post__short-description">
+                {{ post.shortDescription }}
+            </p>
+
+            <p class="post__text">
+                {{ post.text }}
+            </p>
+        </article>
+
+        <div>
+            <comment-form v-model="comment"
+                          :comment="comment"
+                          @submit="addComment" />
+
+            <h3 class="post__comments">Comments</h3>
+
+            <p v-if="post.comments.length === 0"
+               class="post__no-comment">
+                No comments
+            </p>
+
+            <comment v-for="(comment, index) in post.comments"
+                     :comment="comment"
+                     :key="'comment' + index" />
         </div>
-
-        <h2 class="post__title">
-            {{ post.title }}
-        </h2>
-
-        <p class="post__short-description">
-            {{ post.shortDescription }}
-        </p>
-
-        <p class="post__text">
-            {{ post.text }}
-        </p>
-
-        <comment-form v-model="comment"
-                      :comment="comment"
-                      @submit="addComment" />
-
-        <comment v-for="(comment, index) in post.comments"
-                 :comment="comment"
-                 :key="'comment' + index" />
-    </article>
+    </div>
 </template>
 
 <script>

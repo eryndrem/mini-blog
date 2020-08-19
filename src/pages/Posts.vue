@@ -8,38 +8,48 @@
         </p>
 
         <article v-else
-                 v-for="{ name, title, shortDescription } in posts"
+                 v-for="{ name, title, shortDescription, comments } in posts"
                  :key="name"
-                 class="short-post">
-            <div class="short-post__header">
-                <div class="short-post__title">
+                 class="post-preview">
+            <div class="post-preview__header">
+                <div class="post-preview__title">
                     {{ title }}
                 </div>
 
-                <div class="short-post__name">
+                <div class="post-preview__name">
                     {{ name }}
                 </div>
 
                 <router-link tag="span"
-                             class="mdi mdi-tooltip-edit short-post__edit"
+                             class="mdi mdi-tooltip-edit post-preview__edit"
                              :to="`edit-post/${name}`"
                              title="edit">
                 </router-link>
 
-                <span class="mdi mdi-delete short-post__delete"
+                <span class="mdi mdi-delete post-preview__delete"
                       title="delete"
                       @click="deletePost(name)"></span>
-
             </div>
 
-            <p class="short-post__short-description">
+            <p class="post-preview__short-description">
                 {{ shortDescription }}
             </p>
 
-            <router-link class="short-post__read-more"
-                         :to="`post/${name}`">
-                Read more...
-            </router-link>
+            <div class="post-preview__footer">
+                <router-link class="post-preview__read-more"
+                             :to="`post/${name}`">
+                    Read more...
+                </router-link>
+
+                <span v-if="comments.length === 0"
+                      class="post-preview__no-comments">No comments</span>
+
+                <span v-else-if="comments.length === 1"
+                      class="post-preview__comments">{{ comments.length }} comment</span>
+
+                <span v-else
+                      class="post-preview__comments">{{ comments.length }} comments </span>
+            </div>
         </article>
     </div>
 </template>

@@ -1,24 +1,24 @@
 .post
     display: flex
     flex-flow: column nowrap
-    margin-top: 20px
-    margin-left: 60px
-    margin-right: 60px
+    margin: 20px 60px
     border: 1px solid $primary
     border-radius: 6px
     padding: 10px
 
-    &__tools
+    &__header
         display: flex
         color: $secondary
 
     &__date
+        margin-left: 12px
         text-align: left
         width: 100px
 
     &__name
         text-align: right
         margin-left: auto
+        margin-right: 12px
         width: 100px
 
     &__title
@@ -28,8 +28,20 @@
 
     &__short-description
         text-align: center
-        margin: 0
 
     &__text
         text-align: left
+        margin: 0 20px
+
+    &__comments
+        text-align: center
+
+    &__no-comment
+        text-align: center
+        margin-bottom: 30px
+
+@media (max-width: $mobile)
+    .post
+        margin: 20px 30px
+
 
