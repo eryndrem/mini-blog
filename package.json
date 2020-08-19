@@ -46,7 +46,8 @@
         "error",
         4
       ],
-      "guard-for-in": "error"
+      "guard-for-in": "error",
+      "no-param-reassign": 0
     }
   },
   "browserslist": [

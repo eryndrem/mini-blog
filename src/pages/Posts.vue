@@ -20,8 +20,11 @@
                     {{ name }}
                 </div>
 
-                <span class="mdi mdi-tooltip-edit short-post__edit"
-                      title="edit"></span>
+                <router-link tag="span"
+                             class="mdi mdi-tooltip-edit short-post__edit"
+                             :to="`edit-post/${name}`"
+                             title="edit">
+                </router-link>
 
                 <span class="mdi mdi-delete short-post__delete"
                       title="delete"
@@ -34,7 +37,9 @@
             </p>
 
             <router-link class="short-post__read-more"
-                :to="`post/${name}`">Read more...</router-link>
+                         :to="`post/${name}`">
+                Read more...
+            </router-link>
         </article>
     </div>
 </template>

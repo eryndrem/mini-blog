@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-// import Post from '@/pages/Post.vue';
 
 Vue.use(VueRouter);
 
@@ -19,6 +18,11 @@ const routes = [
         path: '/post/:name',
         name: 'post',
         component: () => import(/* webpackChunkName: "post:name" */ '../pages/Post.vue'),
+    },
+    {
+        path: '/edit-post/:name',
+        name: 'edit-post',
+        component: () => import(/* webpackChunkName: "edit-post:name" */ '../pages/EditPost.vue'),
     },
 ];
 

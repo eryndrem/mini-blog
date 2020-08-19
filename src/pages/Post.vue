@@ -1,5 +1,5 @@
 <template>
-    <article class="post">
+    <article class="post" v-if="post">
         <div class="post__tools">
             <span class="post__date">
                 {{ post.date }}
@@ -21,31 +21,54 @@
         <p class="post__text">
             {{ post.text }}
         </p>
+
+        <comment-form v-model="comment"
+                      :comment="comment"
+                      @submit="addComment" />
+
+        <comment v-for="(comment, index) in post.comments"
+                 :comment="comment"
+                 :key="'comment' + index" />
     </article>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import Comment from '@/components/Comment.vue';
+import CommentForm from '@/components/CommentForm.vue';
 
 export default {
+    components: {
+        Comment,
+        CommentForm,
+    },
+
     data: () => ({
         post: null,
-    }),
-
-    computed: mapState({
-        posts: (state) => state.posts,
-
-        getName() {
-            return this.$route.params.name;
+        comment: {
+            username: '',
+            text: '',
         },
     }),
 
-    created() {
-        for (let i = 0; i < this.posts.length; i += 1) {
-            if (this.posts[i].name === this.getName) {
-                this.post = this.posts[i];
-            }
-        }
+    methods: {
+        addComment() {
+            this.$store.dispatch('addComment', {
+                postName: this.$route.params.name,
+                username: this.comment.username,
+                text: this.comment.text,
+            });
+
+            this.comment.username = '';
+            this.comment.text = '';
+        },
+    },
+
+    async created() {
+        const { name } = this.$route.params;
+
+        const post = await this.$store.dispatch('getPostByName', name);
+
+        this.post = post;
     },
 };
 </script>

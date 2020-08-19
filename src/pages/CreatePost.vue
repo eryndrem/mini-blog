@@ -40,54 +40,22 @@ export default {
     name: 'CreatePost',
 
     data: () => ({
-        date: new Date(),
+        name: '',
+        title: '',
+        shortDescription: '',
+        text: '',
     }),
-
-    computed: {
-        name: {
-            get() {
-                return this.$store.state.post.name;
-            },
-            set(value) {
-                this.$store.commit('SET_POST_NAME', value);
-            },
-        },
-
-        title: {
-            get() {
-                return this.$store.state.post.title;
-            },
-            set(value) {
-                this.$store.commit('SET_POST_TITLE', value);
-            },
-        },
-
-        shortDescription: {
-            get() {
-                return this.$store.state.post.shortDescription;
-            },
-            set(value) {
-                this.$store.commit('SET_POST_SHORT_DESCRIPTION', value);
-            },
-        },
-
-        text: {
-            get() {
-                return this.$store.state.post.text;
-            },
-            set(value) {
-                this.$store.commit('SET_TEXT', value);
-            },
-        },
-
-        getDate() {
-            return this.date.toLocaleString('ru');
-        },
-    },
 
     methods: {
         createPost() {
-            this.$store.dispatch('createPost', this.getDate);
+            this.$store.dispatch('createPost', {
+                name: this.name,
+                title: this.title,
+                shortDescription: this.shortDescription,
+                text: this.text,
+            });
+
+            this.$router.push({ name: 'posts' });
         },
     },
 };
